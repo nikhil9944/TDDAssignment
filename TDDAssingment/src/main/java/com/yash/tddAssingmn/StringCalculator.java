@@ -1,7 +1,6 @@
 package com.yash.tddAssingmn;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -105,5 +104,23 @@ public class StringCalculator {
 			logger.info(String.valueOf(result));
 		}
 		return result;
+	}
+	
+	
+	public int addWithNegative(String number){
+		if (!number.isEmpty()) {
+			String[] inputString = number.split(",");
+			int[] array = Arrays.stream(inputString).mapToInt(Integer::parseInt).toArray();
+			for (int i : array) {
+				if(i<0){
+					throw new IllegalArgumentException();		
+				}
+				result += i;
+				}
+			}
+		
+		
+		return result;
+		
 	}
 }

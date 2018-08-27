@@ -4,11 +4,11 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.Any;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.yash.tddAssingmn.StringCalculator;
@@ -40,8 +40,12 @@ public class StringCalculatorTest {
 	}
 
 	@Test
-	public void TestAddWithMultipleNumberInStringReturnTheTotal() {
-		Assert.assertEquals(15, stringCalculator.addMultipleNumber("1,2,3,4,5"));
+	public void shouldRaiseExceptionOnNgative() {
+		try{
+			stringCalculator.addMultipleNumber("-1,-2");
+		}catch(RuntimeException exception){
+			//ok
+		}
 	}
 
 	@Test
@@ -64,5 +68,14 @@ public class StringCalculatorTest {
 		Mockito.doNothing().when(logger).info(Mockito.any(String.class));
 		stringCalculator.addWithLogger("12,13");
 		Mockito.verify(logger).info(Mockito.any(String.class));
+	}
+	@Test
+	public void shouldRaiseExceptionOnNegatives(){
+		try{
+			stringCalculator.addWithNegative("-1,-2,3,4");
+		}catch(RuntimeException exception){
+			System.out.println("Negative not allowed.");
+		}
+		
 	}
 }
